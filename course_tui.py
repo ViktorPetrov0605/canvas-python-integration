@@ -23,7 +23,7 @@ def list_assignments(course):
 
 def main_menu():
     while True:
-        print("\nCanvas API Terminal Interface")
+        print("\nWelcome to the Canvas CLI Tool!")  # More casual greeting
         print("1. List All Courses")
         print("2. View Assignments for a Course")
         print("3. Exit")
