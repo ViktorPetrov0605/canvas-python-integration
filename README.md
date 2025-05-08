@@ -14,6 +14,7 @@ The end goal is to create a unified system combining these capabilities with a l
 - Terminal User Interface (TUI) for course navigation (`course_tui.py`)
 - Assignment listing functionality with due dates and points
 - Basic Canvas API interaction patterns
+- Added enviroment file to allow the user to configure their API key and endpoint url
 
 #### Future Work:
 - Expand to include submission management
