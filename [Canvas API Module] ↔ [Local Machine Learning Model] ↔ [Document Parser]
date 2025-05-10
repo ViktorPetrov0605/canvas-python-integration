@@ -1,8 +1,0 @@
-The machine learning model will:
-- Process assignment patterns from Canvas
-- Analyze document content from parsed DOCX files
-- Provide automated recommendations (e.g., assignment difficulty prediction, content alignment analysis)
-
-## Setup & Usage
-
-### Prerequisites
