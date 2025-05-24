@@ -251,19 +251,19 @@ class Tools:
         except Exception as e:
             return [{"error": f"Failed to fetch assignments: {str(e)}"}]
 
-        def get_assignment_details(self, assignment_id: int) -> Dict[str, Any]:
-            """
-            Retrieve detailed assignment data by ID.
-            Args:
-                assignment_id (int): The ID of the assignment.
-            Returns:
-                Dictionary with all assignment details or error message.
-            """
-            try:
-                assignment = self.canvas.get_assignment(assignment_id)
-                return self._assignment_to_dict(assignment)
-            except Exception as e:
-                return {"error": f"Failed to fetch assignment details: {str(e)}"}
+    def get_assignment_details(self, assignment_id: int) -> Dict[str, Any]:
+        """
+        Retrieve detailed assignment data by ID.
+        Args:
+            assignment_id (int): The ID of the assignment.
+        Returns:
+            Dictionary with all assignment details or error message.
+        """
+        try:
+            assignment = self.canvas.get_assignment(assignment_id)
+            return self._assignment_to_dict(assignment)
+        except Exception as e:
+            return {"error": f"Failed to fetch assignment details: {str(e)}"}
 
     def list_modules(self, course_id: int) -> List[Dict[str, Any]]:
         """
