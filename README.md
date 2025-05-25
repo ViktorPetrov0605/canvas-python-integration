@@ -1,33 +1,76 @@
 # Canvas Research & Integration Project
 
-## Overview
-This repository explores two core research areas:
-1. **Canvas API Integration** - Python library research for course/assignment management
-2. **Document Parsing** - Extracting structured data from DOCX files
+## Project Structure
 
-The end goal is to create a unified system combining these capabilities with a locally-running machine learning model for automated analysis.
+```
+src/
+├── canvas/
+│   ├── api/         # Core Canvas API implementation
+│   ├── models/      # Canvas API data models
+│   └── utils/       # Shared utilities
+├── interfaces/      # User interface implementations
+└── tools/          # Development and integration tools
+    ├── openapi/    # OpenAPI schema tools
+    ├── proxy/      # API proxy server
+    └── generated_tools/ # Auto-generated API clients
+```
 
-## Research Areas
+## Components
 
-### 1. Canvas Python Library Research
-#### Successful Integrations:
-- Terminal User Interface (TUI) for course navigation (`course_tui.py`)
-- Assignment listing functionality with due dates and points
-- Basic Canvas API interaction patterns
-- Added enviroment file to allow the user to configure their API key and endpoint url
+### 1. Canvas API Integration
+- API client with OpenAPI specification support
+- Auto-generated data models
+- Authentication handling
+- Response validation
 
-#### Future Work:
-- Expand to include submission management
-- Develop graphical interface options
-- Integrate with machine learning model for pattern analysis
+### 2. User Interfaces
+- Terminal User Interface (TUI) for course navigation
+- OpenWebUI tool interface
+- Assignment management interface
 
-### 2. Document Parsing Research
-#### Successful Integrations:
-- DOCX file content extraction (`docworker.py`)
-- Paragraph and table parsing capabilities
+### 3. Development Tools
+- OpenAPI schema parser and generator
+- API proxy server for testing
+- Document parsing tools
+- AI integration utilities
 
-#### Future Work:
-- Add metadata extraction
+### 4. Document Parsing
+- DOCX file content extraction
+- Paragraph and table parsing
+- Content structure analysis
+- Metadata extraction capabilities
+
+## Getting Started
+
+1. Set up environment variables:
+   ```bash
+   CANVAS_API_TOKEN="your_token_here"
+   CANVAS_DOMAIN="your_canvas_domain"
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Choose an interface:
+   - TUI: `python src/interfaces/course_tui.py`
+   - OpenWebUI: Configure tool in your OpenWebUI installation
+
+## Features
+
+### Implemented
+- Course navigation and management
+- Assignment listing and details
+- Document content extraction
+- OpenAPI integration
+- Multiple interface options
+
+### Planned
+- Submission management
+- Content categorization
+- Machine learning integration
+- Enhanced metadata extraction
 - Implement content categorization
 - Integrate with machine learning model for content correlation
 
