@@ -17,12 +17,14 @@ from fastapi import FastAPI, Request, HTTPException, Header, Depends
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import uvicorn
 
 # Create FastAPI app
 app = FastAPI()
 
 # Add CORS middleware
-app.add_cors_middleware(
+app.add_middleware(
+    CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
@@ -43,7 +45,7 @@ client = httpx.AsyncClient()
 # Function to load and filter OpenAPI schema
 def load_openapi_schema(
     openapi_path: str,
-    include_tags: List[str] = None,
+    include_tags: Optional[List[str]] = None,
     proxy_prefix: str = ""
 ) -> Dict[str, Any]:
     """Load an OpenAPI schema and filter it based on tags."""

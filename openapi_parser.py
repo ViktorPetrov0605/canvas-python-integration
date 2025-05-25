@@ -68,12 +68,25 @@ METHOD_TEMPLATE = '''
         {param_docs}
         :return: Dictionary with API response data or error details
         """
-        url = self.api_base + "{path}"
+        url = self.api_base + f"{path_template}"
         
         {payload_code}
         
         try:
-            response = requests.{http_method.lower()}(url{payload_arg}{query_param_arg}, headers=self.headers)
+            method = "{http_method}".lower()
+            if method == "get":
+                response = requests.get(url{payload_arg}{query_param_arg}, headers=self.headers)
+            elif method == "post":
+                response = requests.post(url{payload_arg}{query_param_arg}, headers=self.headers)
+            elif method == "put":
+                response = requests.put(url{payload_arg}{query_param_arg}, headers=self.headers)
+            elif method == "delete":
+                response = requests.delete(url{payload_arg}{query_param_arg}, headers=self.headers)
+            elif method == "patch":
+                response = requests.patch(url{payload_arg}{query_param_arg}, headers=self.headers)
+            else:
+                response = requests.get(url{payload_arg}{query_param_arg}, headers=self.headers)
+            
             response.raise_for_status()
             return response.json()
         except Exception as e:
@@ -244,6 +257,15 @@ def generate_method(path: str, method: str, schema: Dict, components: Dict) -> s
     else:
         query_param_arg = ""
     
+    # Process path parameters
+    path_template = path
+    # Check for path parameters - replace {param} with {param_snake_case}
+    for param in all_params:
+        if param['in'] == 'path':
+            param_name = param['name']
+            snake_name = snake_case(param_name)
+            path_template = path_template.replace(f"{{{param_name}}}", f"{{{snake_name}}}")
+            
     # Return the formatted method template
     return METHOD_TEMPLATE.format(
         method_name=method_name,
@@ -251,9 +273,9 @@ def generate_method(path: str, method: str, schema: Dict, components: Dict) -> s
         summary=summary,
         description=description,
         param_docs=param_docs,
-        path=path,
+        path_template=path_template,
         payload_code=payload_code,
-        http_method=method,
+        http_method=method.lower(),
         payload_arg=payload_arg,
         query_param_arg=query_param_arg
     )
